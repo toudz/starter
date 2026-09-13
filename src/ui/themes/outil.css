@@ -1,0 +1,61 @@
+/* DA « Outil ». Blanc pur, orange franc, angles coupés net. */
+:root {
+  --c-bg: #ffffff;
+  --c-surface: #ffffff;
+  --c-surface-2: #f4f5f6;
+  --c-line: #e1e3e6;
+  --c-line-2: #c5c9ce;
+  --c-ink: #0b0d0f;
+  --c-ink-2: #454950;
+  --c-ink-3: #757a82;
+  --c-accent: #d9410f;
+  --c-accent-2: #bc3709;
+  --c-accent-ink: #ffffff;
+  --c-accent-soft: #fce9e1;
+
+  --f-display: var(--font-a), system-ui, sans-serif;
+  --f-body: var(--font-b), system-ui, sans-serif;
+
+  --r-sm: 2px;
+  --r-md: 2px;
+  --r-lg: 4px;
+
+  --sh-sm: 0 1px 2px rgb(11 13 15 / 0.07);
+  --sh-lg: 0 6px 22px rgb(11 13 15 / 0.11);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-bg: #0a0b0d;
+    --c-surface: #121418;
+    --c-surface-2: #191c21;
+    --c-line: #23262c;
+    --c-line-2: #373b43;
+    --c-ink: #eceef1;
+    --c-ink-2: #a4aab2;
+    --c-ink-3: #747a83;
+    --c-accent: #ff7847;
+    --c-accent-2: #ff9269;
+    --c-accent-ink: #0a0b0d;
+    --c-accent-soft: #2b1911;
+    --sh-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+    --sh-lg: 0 10px 30px rgb(0 0 0 / 0.5);
+  }
+}
+
+:root[data-theme='dark'] {
+  --c-bg: #0a0b0d;
+  --c-surface: #121418;
+  --c-surface-2: #191c21;
+  --c-line: #23262c;
+  --c-line-2: #373b43;
+  --c-ink: #eceef1;
+  --c-ink-2: #a4aab2;
+  --c-ink-3: #747a83;
+  --c-accent: #ff7847;
+  --c-accent-2: #ff9269;
+  --c-accent-ink: #0a0b0d;
+  --c-accent-soft: #2b1911;
+  --sh-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+  --sh-lg: 0 10px 30px rgb(0 0 0 / 0.5);
+}

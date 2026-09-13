@@ -1,0 +1,126 @@
+/*
+ * VERROUILLÉ. Ne pas modifier pour un site.
+ * Tout ce qui est propre à un site vit dans src/ui/theme.css.
+ */
+@import 'tailwindcss';
+@import './theme.css';
+
+@theme inline {
+  /* Couleurs. Pilotées par theme.css, donc par la DA du site. */
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-line: var(--c-line);
+  --color-line-2: var(--c-line-2);
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-ink-3: var(--c-ink-3);
+  --color-accent: var(--c-accent);
+  --color-accent-2: var(--c-accent-2);
+  --color-accent-ink: var(--c-accent-ink);
+  --color-accent-soft: var(--c-accent-soft);
+
+  /* Sémantique. Identique pour tous les sites. */
+  --color-ok: var(--c-ok);
+  --color-ok-soft: var(--c-ok-soft);
+  --color-warn: var(--c-warn);
+  --color-warn-soft: var(--c-warn-soft);
+  --color-danger: var(--c-danger);
+  --color-danger-soft: var(--c-danger-soft);
+
+  --font-display: var(--f-display);
+  --font-body: var(--f-body);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+
+  --shadow-sm: var(--sh-sm);
+  --shadow-lg: var(--sh-lg);
+}
+
+@theme {
+  /* Échelle typographique. Huit crans, rien entre les deux. */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.45;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.55;
+  --text-lg: 1.1875rem;
+  --text-lg--line-height: 1.5;
+  --text-xl: 1.4375rem;
+  --text-xl--line-height: 1.3;
+  --text-2xl: 1.8125rem;
+  --text-2xl--line-height: 1.2;
+  --text-3xl: clamp(2.1rem, 1.6rem + 1.8vw, 2.7rem);
+  --text-3xl--line-height: 1.12;
+  --text-4xl: clamp(2.5rem, 1.8rem + 2.9vw, 3.5rem);
+  --text-4xl--line-height: 1.08;
+}
+
+/* Sémantique : même valeurs partout, seul le thème clair/sombre les change. */
+:root {
+  --c-ok: #0f7a52;
+  --c-ok-soft: #e3f2eb;
+  --c-warn: #8a5e00;
+  --c-warn-soft: #f9efdb;
+  --c-danger: #b32620;
+  --c-danger-soft: #fbe8e6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-ok: #5fcb9c;
+    --c-ok-soft: #10271d;
+    --c-warn: #dfac55;
+    --c-warn-soft: #292111;
+    --c-danger: #f08078;
+    --c-danger-soft: #2d1816;
+  }
+}
+:root[data-theme='dark'] {
+  --c-ok: #5fcb9c;
+  --c-ok-soft: #10271d;
+  --c-warn: #dfac55;
+  --c-warn-soft: #292111;
+  --c-danger: #f08078;
+  --c-danger-soft: #2d1816;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background-color: var(--color-accent-soft);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}

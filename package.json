@@ -1,0 +1,53 @@
+{
+  "name": "site-starter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "pnpm run check:design && cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=4000\" payload generate:importmap && next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "lint": "next lint",
+    "check:design": "tsx scripts/check-design.ts",
+    "check": "pnpm run check:design && pnpm run lint",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "db:migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
+    "db:migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.82.1",
+    "@payloadcms/next": "^3.82.1",
+    "@payloadcms/richtext-lexical": "^3.82.1",
+    "@payloadcms/storage-vercel-blob": "^3.82.1",
+    "@payloadcms/ui": "^3.82.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
+    "graphql": "^16.9.0",
+    "next": "15.4.11",
+    "payload": "^3.82.1",
+    "pg": "^8.16.3",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "resend": "^6.12.2",
+    "sharp": "^0.35.3",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^22.19.9",
+    "@types/pg": "^8.15.6",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "15.4.11",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^4.1.18",
+    "tsx": "^4.21.0",
+    "typescript": "^5.7.3"
+  },
+  "engines": { "node": "^20.9.0 || >=22.0.0", "pnpm": "^9 || ^10" },
+  "pnpm": { "onlyBuiltDependencies": ["sharp", "esbuild", "unrs-resolver"] }
+}

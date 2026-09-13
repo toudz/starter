@@ -1,0 +1,64 @@
+/*
+ * DA « Sobre ». Neutres froids, angles vifs, aucune ombre.
+ * C'est le SEUL fichier propre à un site. Copié en src/ui/theme.css.
+ */
+:root {
+  --c-bg: #fbfbfc;
+  --c-surface: #ffffff;
+  --c-surface-2: #f1f2f5;
+  --c-line: #e2e4e9;
+  --c-line-2: #c6cad2;
+  --c-ink: #15171c;
+  --c-ink-2: #4b5058;
+  --c-ink-3: #7c828c;
+  --c-accent: #254a75;
+  --c-accent-2: #31608f;
+  --c-accent-ink: #ffffff;
+  --c-accent-soft: #e9eff6;
+
+  --f-display: var(--font-a), system-ui, sans-serif;
+  --f-body: var(--font-b), system-ui, sans-serif;
+
+  --r-sm: 0px;
+  --r-md: 0px;
+  --r-lg: 0px;
+
+  --sh-sm: 0 1px 2px rgb(21 23 28 / 0.05);
+  --sh-lg: 0 8px 28px rgb(21 23 28 / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-bg: #0e1014;
+    --c-surface: #15181e;
+    --c-surface-2: #1c2027;
+    --c-line: #262a33;
+    --c-line-2: #39404a;
+    --c-ink: #e9ebef;
+    --c-ink-2: #a3a9b4;
+    --c-ink-3: #767c87;
+    --c-accent: #8ab4e0;
+    --c-accent-2: #a8caee;
+    --c-accent-ink: #0e1014;
+    --c-accent-soft: #162434;
+    --sh-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+    --sh-lg: 0 10px 30px rgb(0 0 0 / 0.5);
+  }
+}
+
+:root[data-theme='dark'] {
+  --c-bg: #0e1014;
+  --c-surface: #15181e;
+  --c-surface-2: #1c2027;
+  --c-line: #262a33;
+  --c-line-2: #39404a;
+  --c-ink: #e9ebef;
+  --c-ink-2: #a3a9b4;
+  --c-ink-3: #767c87;
+  --c-accent: #8ab4e0;
+  --c-accent-2: #a8caee;
+  --c-accent-ink: #0e1014;
+  --c-accent-soft: #162434;
+  --sh-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+  --sh-lg: 0 10px 30px rgb(0 0 0 / 0.5);
+}
