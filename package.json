@@ -13,7 +13,9 @@
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "db:migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
     "db:migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
-    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types"
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "create-site": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/create-site.ts",
+    "bootstrap:admin": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/bootstrap-admin.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.82.1",
@@ -48,6 +50,15 @@
     "tsx": "^4.21.0",
     "typescript": "^5.7.3"
   },
-  "engines": { "node": "^20.9.0 || >=22.0.0", "pnpm": "^9 || ^10" },
-  "pnpm": { "onlyBuiltDependencies": ["sharp", "esbuild", "unrs-resolver"] }
+  "engines": {
+    "node": "^20.9.0 || >=22.0.0",
+    "pnpm": "^9 || ^10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
 }
