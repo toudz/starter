@@ -9,6 +9,18 @@ import { join, relative } from 'node:path'
 
 const ROOT = process.cwd()
 const SCAN = ['src/app/(frontend)', 'src/components']
+
+/**
+ * Fichiers de génération d'images. next/og ne comprend que le style en ligne :
+ * Tailwind n'y arrive pas. Les exclure est la seule option honnête.
+ */
+const EXCLUDED_FILES = /(opengraph-image|twitter-image|icon|apple-icon)\.tsx$/
+
+/**
+ * Échappatoire volontairement visible : « // socle-ignore: raison » sur la
+ * ligne précédente. Elle demande une raison écrite, et un grep la retrouve.
+ */
+const ESCAPE = /\/\/\s*socle-ignore:\s*\S/
 const ALLOWED_SPACE = new Set(['0', '1', '2', '3', '4', '6', '8', '12', '16', '24'])
 
 type Finding = { file: string; line: number; rule: string; found: string; fix: string }
@@ -73,7 +85,7 @@ function walk(dir: string, out: string[] = []): string[] {
   for (const name of entries) {
     const full = join(dir, name)
     if (statSync(full).isDirectory()) walk(full, out)
-    else if (/\.(tsx|ts)$/.test(name)) out.push(full)
+    else if (/\.(tsx|ts)$/.test(name) && !EXCLUDED_FILES.test(name)) out.push(full)
   }
   return out
 }
@@ -85,6 +97,7 @@ for (const base of SCAN) {
     const lines = readFileSync(file, 'utf8').split('\n')
     lines.forEach((line, i) => {
       if (line.trimStart().startsWith('//') || line.trimStart().startsWith('*')) return
+      if (ESCAPE.test(lines[i - 1] ?? '')) return
       for (const rule of RULES) {
         rule.re.lastIndex = 0
         let m: RegExpExecArray | null

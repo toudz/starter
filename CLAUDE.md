@@ -51,6 +51,16 @@ Interdits dans une page, vérifiés par `pnpm check:design` qui casse le build :
 Si une page a besoin de quelque chose que le socle n'a pas, on ajoute au socle.
 On ne contourne pas.
 
+Une seule échappatoire, volontairement visible et qui demande une raison écrite :
+
+```tsx
+// socle-ignore: next/og ne comprend que le style en ligne
+<div style={{ display: 'flex' }} />
+```
+
+Un `grep socle-ignore` retrouve toutes les entorses assumées. Si la liste
+s'allonge, c'est le socle qui est incomplet, pas la règle qui est trop stricte.
+
 ## Écriture
 
 Titre de 8 mots maximum. Paragraphe de 3 lignes maximum. Une idée par section.
@@ -59,6 +69,30 @@ Un seul bouton principal par écran. Pas de tiret cadratin.
 ## Mobile
 
 Toute page se conçoit à 390 px. Le bureau élargit ce dessin, jamais l'inverse.
+
+## Ce qui est déjà câblé
+
+**Connexion sans mot de passe.** `/connexion` demande un code à six chiffres
+envoyé par email. Le code sort de `crypto.randomInt`, il est détruit à la
+première tentative même fausse, il expire en dix minutes. La session est un
+cookie httpOnly signé en HMAC. Aucune route ne doit jamais croire un email
+envoyé par le client : l'identité vient de `getSession()`, jamais d'ailleurs.
+
+**Emails.** `send()` passe par Resend. `layout()` donne la mise en page commune.
+L'auth de l'admin Payload est branchée sur le même transport, donc le « mot de
+passe oublié » fonctionne.
+
+**Formulaire de contact.** `/contact` écrit dans la collection `leads`, prévient
+l'adresse de `site.config`, et renvoie une copie à l'expéditeur. Deux filtres
+anti robot, aucun captcha : un champ piège et le temps de remplissage. Un envoi
+refusé répond comme un envoi réussi, pour ne rien apprendre à un robot.
+
+**Limitation de débit.** `rejectIfTooMany()` sur chaque route publique. Le
+compteur vit en mémoire de l'instance : ça borne une salve, ça ne remplace pas
+un pare-feu.
+
+**SEO.** `sitemap.ts`, `robots.ts`, données structurées dans le layout, image de
+partage générée dans `opengraph-image.tsx`.
 
 ## Carte des fichiers
 
@@ -77,6 +111,13 @@ Toute page se conçoit à 390 px. Le bureau élargit ce dessin, jamais l'inverse
 | Page de référence du socle | `src/app/(frontend)/design/page.tsx` |
 | Garde-fou | `scripts/check-design.ts` |
 | Schéma Payload | `src/payload.config.ts`, `src/collections/` |
+| Sessions et identité | `src/lib/session.ts` |
+| Codes de connexion | `src/lib/magicCodes.ts` |
+| Envoi d'emails et gabarits | `src/lib/mailer.ts` |
+| Limitation de débit | `src/lib/rateLimit.ts` |
+| Filtres anti robot | `src/lib/antiSpam.ts` |
+| Données structurées | `src/lib/jsonLd.ts` |
+| En tête et pied de page | `src/ui/chrome.tsx` |
 
 ## Commandes
 

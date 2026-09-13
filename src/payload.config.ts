@@ -6,8 +6,11 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
+import { Leads } from './collections/Leads'
+import { MagicCodes } from './collections/MagicCodes'
 import { Media } from './collections/Media'
 import { Users } from './collections/Users'
+import { emailAdapter } from './lib/payloadEmailAdapter'
 import { serverURL } from './site.config'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -15,7 +18,8 @@ const dirname = path.dirname(fileURLToPath(import.meta.url))
 export default buildConfig({
   serverURL,
   admin: { user: Users.slug, importMap: { baseDir: path.resolve(dirname) } },
-  collections: [Users, Media],
+  collections: [Users, Media, Leads, MagicCodes],
+  email: emailAdapter,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

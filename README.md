@@ -25,6 +25,14 @@ Deux fichiers, rien d'autre :
 
 Puis les deux fontes dans `src/app/(frontend)/layout.tsx`.
 
+## Ce que le starter contient
+
+Connexion par code email, envoi d'emails via Resend, formulaire de contact avec
+collection `leads` et filtres anti robot, limitation de débit, sitemap, robots,
+données structurées, image de partage, admin Payload.
+
+Pages livrées : `/`, `/contact`, `/connexion`, `/compte`, `/design`, `/admin`.
+
 ## Le garde-fou
 
 `pnpm check:design` refuse dans les pages toute valeur arbitraire, couleur en dur,

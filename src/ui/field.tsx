@@ -1,4 +1,9 @@
-import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes } from 'react'
+import type {
+  InputHTMLAttributes,
+  ReactNode,
+  SelectHTMLAttributes,
+  TextareaHTMLAttributes,
+} from 'react'
 import { cn } from './cn'
 
 const control =
@@ -51,5 +56,16 @@ export function Select({
     <select className={cn(control, className)} {...props}>
       {children}
     </select>
+  )
+}
+
+export function Textarea({
+  className,
+  invalid,
+  rows = 5,
+  ...props
+}: TextareaHTMLAttributes<HTMLTextAreaElement> & { invalid?: boolean }) {
+  return (
+    <textarea rows={rows} className={cn(control, invalid && 'border-danger', className)} {...props} />
   )
 }
