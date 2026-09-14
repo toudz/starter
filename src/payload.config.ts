@@ -23,7 +23,16 @@ export default buildConfig({
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
-  db: postgresAdapter({ pool: { connectionString: process.env.DATABASE_URL || '' } }),
+  db: postgresAdapter({
+    pool: { connectionString: process.env.DATABASE_URL || '' },
+    /*
+     * Pas de synchro automatique du schéma, même en développement.
+     * Elle écrit une ligne « dev » dans payload_migrations, et « payload
+     * migrate » reste alors bloqué sans rien afficher au déploiement suivant.
+     * Tout changement de schéma passe par une migration, sans exception.
+     */
+    push: false,
+  }),
   sharp,
   plugins: [
     vercelBlobStorage({

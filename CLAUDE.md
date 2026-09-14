@@ -135,3 +135,16 @@ exige une migration `ALTER TYPE ... ADD VALUE IF NOT EXISTS` dans le même commi
 sinon Postgres refuse les écritures.
 
 Ne jamais faire d'`UPDATE` sur des données existantes sans demande explicite.
+
+La synchro automatique de schéma est coupée (`push: false`), y compris en
+développement. Elle écrit une ligne « dev » dans `payload_migrations`, et
+`payload migrate` reste alors bloqué sans rien afficher au déploiement suivant.
+Après tout changement de schéma :
+
+```bash
+pnpm db:migrate:create <nom>
+pnpm db:migrate
+```
+
+Le build joue les migrations tout seul, donc un nouveau site se met en place
+au premier déploiement sans intervention.
